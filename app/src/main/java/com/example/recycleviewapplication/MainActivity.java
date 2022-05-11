@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         people.add(new Person("Dwayne", "johnson", "plane"));
         people.add(new Person("Hritvik", "Gupta", "Plane"));
 
-        RecyclerView.Adapter myAdapter = new PersonAdapter(this, people);
+        PersonAdapterNew myAdapter = new PersonAdapterNew(people);
         // Here we set the recycler view that we have created as the myadpater that we have created
         recyclerView.setAdapter(myAdapter);
     }
