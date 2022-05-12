@@ -8,20 +8,38 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.TypedArrayUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // We have initially written RecyclerView.Adapter after that we have first created
 //Our own ViewHolder  Then created <PersonAdapter.ViewHolder>
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder>
 {
 
-    private Person [] localdataset;
+    //private Person [] localdataset;
+    OnClickItem activity;
 
-    public PersonAdapter(Context context,Person [] list)
+    private ArrayList<Person> localdataset;
+
+
+
+    //To Pass the data from this adapter to the main activity create an Interface
+    public interface OnClickItem
+    {
+        void onclicking(int index);
+    }
+
+    public PersonAdapter(Context context,ArrayList<Person> list)
     {
         localdataset = list;
+        // Now as we have created an interface we need to set the connection link using the activity that
+        // connects the context
+        activity = (OnClickItem) context;
+
+
 
     }
 
@@ -46,6 +64,16 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    //Now as we need the position on which item it was clicked
+                    //But we have set the tag on OnBindView for the position that is
+                    //Currently being used therefore we reterive that tag Using View
+                    // And passed on to the main activiy using the activity connection that
+                    // we have created
+
+                    //activity.onclicking(Arrays.asList(localdataset).indexOf((Person) view.getTag())); //This is when we have passed static array
+                    //For Dynamic ArrayList we see it below
+                    activity.onclicking(localdataset.indexOf((Person) view.getTag()));
 
                 }
             });
@@ -81,13 +109,14 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
         // for that we set the tag to each itemView
         //Therefore calling the itemView from view holder holder
         //And Thereby setting the tag as the item we are currently at
-        holder.itemView.setTag(localdataset[position]);
+        //holder.itemView.setTag(localdataset[position]); //This is for static Array
+        holder.itemView.setTag(localdataset.get(position));
         //Below we are setting the text of the name py getting the person class which it was clicked on
         // And Then afterwords we call the getName() that we have created in the person.Java class
-        holder.tvName.setText(localdataset[position].getName());
-        holder.tvSurname.setText(localdataset[position].getSurname());
+        holder.tvName.setText(localdataset.get(position).getName());
+        holder.tvSurname.setText(localdataset.get(position).getSurname());
 
-        if(localdataset[position].preference.equals("Bus"))
+        if(localdataset.get(position).preference.equals("Bus"))
         {
             holder.ivPref.setImageResource(R.drawable.bus);
         }
@@ -102,6 +131,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     public int getItemCount() {
         //Here we written the size of the list that we have created so as to let the onBindViewHolder how many
         //times it has to run
-        return localdataset.length;
+        return localdataset.size();
     }
 }
