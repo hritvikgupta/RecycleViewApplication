@@ -1,6 +1,7 @@
 package com.example.recycleviewapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +61,17 @@ public class MainActivity extends AppCompatActivity implements PersonAdapter.OnC
         //Here in this Layout Manger if we want to set our RecyclerView list from
         //Vertical to the horizontal, then we do this
         //Here we have passed the false to the last argument we don't this list to reverse and start from last value
+        /*
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+
+         */
+
+        //Another Type of Layout we can implement is the GridViewLayout
+        //Here the recyclerview is set as matrix which is 2 by 2, 3 by 3 and etc
+        //This can be also vertical or horizontal
+        //If There is Issues in Height Then Use the layout height to wrap content
+        layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
 
 
