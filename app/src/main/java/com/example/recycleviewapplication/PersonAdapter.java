@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder>
 {
 
-    private ArrayList<Person> people;
+    private Person [] localdataset;
 
-    public PersonAdapter(Context context,ArrayList<Person> list)
+    public PersonAdapter(Context context,Person [] list)
     {
-        people = list;
+        localdataset = list;
 
     }
 
@@ -81,13 +81,13 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
         // for that we set the tag to each itemView
         //Therefore calling the itemView from view holder holder
         //And Thereby setting the tag as the item we are currently at
-        holder.itemView.setTag(people.get(position));
+        holder.itemView.setTag(localdataset[position]);
         //Below we are setting the text of the name py getting the person class which it was clicked on
         // And Then afterwords we call the getName() that we have created in the person.Java class
-        holder.tvName.setText(people.get(position).getName());
-        holder.tvSurname.setText(people.get(position).getSurname());
+        holder.tvName.setText(localdataset[position].getName());
+        holder.tvSurname.setText(localdataset[position].getSurname());
 
-        if(people.get(position).getPreference().equals("bus"))
+        if(localdataset[position].preference.equals("Bus"))
         {
             holder.ivPref.setImageResource(R.drawable.bus);
         }
@@ -102,6 +102,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     public int getItemCount() {
         //Here we written the size of the list that we have created so as to let the onBindViewHolder how many
         //times it has to run
-        return people.size();
+        return localdataset.length;
     }
 }

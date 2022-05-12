@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 public class PersonAdapterNew extends RecyclerView.Adapter<PersonAdapterNew.ViewHolder> {
 
-    private ArrayList<Person> people ;
+    private Person [] localdataset ;
     TextView tvName, tvSurname;
     ImageView ivPref;
-    public PersonAdapterNew(ArrayList<Person> dataSet) {
-        people = dataSet;
+    public PersonAdapterNew(Person[] dataSet) {
+        localdataset = dataSet;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,10 +59,10 @@ public class PersonAdapterNew extends RecyclerView.Adapter<PersonAdapterNew.View
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        tvName.setText(people.get(position).getName());
-        tvSurname.setText(people.get(position).getSurname());
+        tvName.setText(localdataset[position].getName());
+        tvSurname.setText(localdataset[position].getSurname());
 
-        if(people.get(position).getPreference().equals("bus"))
+        if(localdataset[position].getPreference().equals("bus"))
         {
             ivPref.setImageResource(R.drawable.bus);
         }
@@ -76,7 +76,7 @@ public class PersonAdapterNew extends RecyclerView.Adapter<PersonAdapterNew.View
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return people.size();
+        return localdataset.length;
     }
 }
 

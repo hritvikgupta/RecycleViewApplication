@@ -3,7 +3,7 @@ package com.example.recycleviewapplication;
 public class Person {
 
     private String name, surname;
-    private String preference;
+    public String preference;
 
     public Person(String name, String surname, String preference) {
         this.name = name;
